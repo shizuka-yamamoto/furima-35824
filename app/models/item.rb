@@ -23,7 +23,7 @@ class Item < ApplicationRecord
     validates :category_id
     validates :condition_id
     validates :postage_id
-    validates :shipping_area_id
+    validates :prefecture_id
     validates :handling_time_id
   end
 end
