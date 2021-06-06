@@ -7,7 +7,7 @@ RSpec.describe Item, type: :model do
 
   describe '出品商品の登録' do
     context '出品商品情報が登録できる場合' do
-      it 'image、item_name、description、category_id、condition_id、postage_id、shipping_area_id、handling_time_id、priceがあれば投稿できる' do
+      it 'image、item_name、description、category_id、condition_id、postage_id、prefecture_id、handling_time_id、priceがあれば投稿できる' do
         expect(@item).to be_valid
       end
       it 'priceが¥300~¥9,999,999の間であれば登録できる' do
@@ -30,8 +30,8 @@ RSpec.describe Item, type: :model do
         @item.postage_id = 2
         expect(@item).to be_valid
       end
-      it 'shipping_area_idがid:1以外であれば登録できる' do
-        @item.shipping_area_id = 2
+      it 'prefecture_idがid:1以外であれば登録できる' do
+        @item.prefecture_id = 2
         expect(@item).to be_valid
       end
       it 'handling_time_idがid:1以外であれば登録できる' do
@@ -75,10 +75,10 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Postage can't be blank")
       end
-      it 'shipping_area_idがid:1では登録できない' do
-        @item.shipping_area_id = 1
+      it 'prefecture_idがid:1では登録できない' do
+        @item.prefecture_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Shipping area can't be blank")
+        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
       it 'handling_time_idがid:1では登録できない' do
         @item.handling_time_id = 1
