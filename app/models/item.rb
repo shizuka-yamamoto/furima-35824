@@ -3,7 +3,7 @@ class Item < ApplicationRecord
   belongs_to :category
   belongs_to :condition
   belongs_to :postage
-  belongs_to :shipping_area
+  belongs_to :prefecture
   belongs_to :handling_time
   belongs_to :user
   has_one :order
