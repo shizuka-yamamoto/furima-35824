@@ -43,7 +43,8 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:item_name, :description, :category_id, :condition_id, :postage_id, :prefecture_id, :handling_time_id, :price, :image).merge(user_id: current_user.id)
+    params.require(:item).permit(:item_name, :description, :category_id, :condition_id, :postage_id, :prefecture_id,
+                                 :handling_time_id, :price, :image).merge(user_id: current_user.id)
   end
 
   def set_item
@@ -55,6 +56,6 @@ class ItemsController < ApplicationController
   end
 
   def sold_out_item
-		redirect_to root_path if @item.order.present?
-	end
+    redirect_to root_path if @item.order.present?
+  end
 end
