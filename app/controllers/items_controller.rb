@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, only: [:edit, :show, :update, :destroy]
   before_action :block_item, only: [:edit, :update, :destroy]
+  before_action :sold_out_item, only: [:edit, :update]
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -42,7 +43,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:item_name, :description, :category_id, :condition_id, :postage_id, :shipping_area_id,
+    params.require(:item).permit(:item_name, :description, :category_id, :condition_id, :postage_id, :prefecture_id,
                                  :handling_time_id, :price, :image).merge(user_id: current_user.id)
   end
 
@@ -52,5 +53,9 @@ class ItemsController < ApplicationController
 
   def block_item
     redirect_to root_path if @item.user != current_user
+  end
+
+  def sold_out_item
+    redirect_to root_path if @item.order.present?
   end
 end
