@@ -10,16 +10,14 @@ document.addEventListener('DOMContentLoaded', function(){
 		 // 表示する画像を生成
 		 const blobImage = document.createElement('img');
 		 blobImage.setAttribute('src', blob);
-		 blobImage.setAttribute("height", 100);
-		 blobImage.setAttribute("width", 100);
-		 blobImage.setAttribute("style", "object-fit: contain;");
+		 blobImage.setAttribute('class', 'img-prop');
 		 
 		 // 生成したHTMLの要素をブラウザに表示させる
 		 imageElement.appendChild(blobImage);
 		 ImageList.appendChild(imageElement);
 	 };
 		document.getElementById('item-image').addEventListener('change', function(e){
-			const imageContent = document.querySelector('img');
+			const imageContent = document.querySelector('.img-prop');
 			if (imageContent){
         imageContent.remove();
       }
