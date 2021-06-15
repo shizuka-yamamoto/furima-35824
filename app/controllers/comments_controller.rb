@@ -1,9 +1,15 @@
 class CommentsController < ApplicationController
-	def	create
-		Comment.create(comment_params)
-	end
+  def	create
+    @comment = Comment.new(comment_params)
+    if @comment.save
+      ActionCable.server.broadcast 'comment_channel', content: @comment, nickname: @comment.user.nickname
+    else
+      render 'items/show'
+    end
+  end
 
-	private
+  private
+
   def comment_params
     params.require(:comment).permit(:text).merge(user_id: current_user.id, item_id: params[:item_id])
   end
